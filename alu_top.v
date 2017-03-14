@@ -1,25 +1,4 @@
 `timescale 1ns/1ps
-
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    10:58:01 10/10/2011 
-// Design Name: 
-// Module Name:    alu_top 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
-
 module alu_top(
                src1,       //1 bit source 1 (input)
                src2,       //1 bit source 2 (input)
