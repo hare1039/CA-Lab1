@@ -1,4 +1,4 @@
-`include "twos_complement_32bit.v"
+`include "subtract_32bit.v"
 
 module test2 ();
     reg clk = 0;
@@ -7,7 +7,7 @@ module test2 ();
     wire [31:0] res;
     wire cout, of;
 
-    twos_complement_32bit X(r1, res);
+    subtract_32bit X(r1, r2, res, cout, of);
     always #6 begin
         clk = ~clk;
     end
@@ -15,12 +15,18 @@ module test2 ();
     initial begin
         reset = 1;
         #20 reset = 0;
-        #10 r1 = 32'hF0000000;
+        #10 r1 = 32'h80000000;
+        r2 = 12341;
         #10 r1 = 32'h20000000;
+        r2 = 132142;
         #10 r1 = 32'h2350000;
+        r2 = -13412423;
         #10 r1 = 32'h3000;
+        r2 = 0;
         #10 r1 = 32'h300;
-        #10 r1 = 32'h420000;
+        r2 = 300;
+        #10 r1 = 32'h0;
+        r2 = 10;
         #10 r1 = 32'h13000;
         #10 r1 = 32'h00000000;
         #10 r1 = 32'h10000000;
