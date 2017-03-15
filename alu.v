@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`include "alu_top.v"
 module alu(
            rst_n,         // negative reset            (input)
            src1,          // 32 bits source 1          (input)
@@ -27,6 +28,8 @@ reg    [32-1:0] result;
 reg             zero;
 reg             cout;
 reg             overflow;
+
+alu_top ALUPART (src1[0], src2[0], less, A_invert, B_invert, cin, operation, result[0], cout);
 
 
 endmodule
