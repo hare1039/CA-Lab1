@@ -1,24 +1,5 @@
 `timescale 1ns/1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date:    15:23:51 08/18/2010
-// Design Name:
-// Module Name:    testbench
-// Project Name:
-// Target Devices:
-// Tool versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+`include "alu.v"
 //`define BONUS
 
 module testbench;
@@ -82,12 +63,12 @@ initial begin
     error_count_tmp = 6'd0;
     pattern_count = 6'd0;
 
-    $readmemh("src1.txt", mem_src1);
-    $readmemh("src2.txt", mem_src2);
-    $readmemh("op.txt", mem_opcode);
-	$readmemh("bonus.txt", mem_bonus);
-    $readmemh("result.txt", mem_result);
-    $readmemh("zcv.txt", mem_zcv);
+    $readmemh("basic_data/src1.txt", mem_src1);
+    $readmemh("basic_data/src2.txt", mem_src2);
+    $readmemh("basic_data/op.txt", mem_opcode);
+	$readmemh("basic_data/bonus.txt", mem_bonus);
+    $readmemh("basic_data/result.txt", mem_result);
+    $readmemh("basic_data/zcv.txt", mem_zcv);
 
     #100 rst_n = 1'b1;
          start_check = 1'd1;
@@ -199,6 +180,11 @@ always@(posedge clk) begin
 				error_count <= error_count + 6'd1;
 			end
 	end
+end
+
+initial begin
+    $dumpfile("result.vcd");
+    $dumpvars();
 end
 
 endmodule
