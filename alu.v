@@ -66,10 +66,17 @@ module alu(
     alu_top ALUPART30 (src1[30], src2[30], 1'b0, ALU_control[3], ALU_control[2], cout_wire[29], ALU_control[1:0], result_wire[30], cout_wire[30], );
     alu_top ALUPART31 (src1[31], src2[31], 1'b0, ALU_control[3], ALU_control[2], cout_wire[30], ALU_control[1:0], result_wire[31], cout_wire[31], MSBset);
 
+    integer i;
 
     always @ ( * ) begin
         result = result_wire;
         cout = cout_wire[31];
         zero = 0;
+        for(i = 0; i < 32; i++) begin
+            zero = zero | result_wire[i];
+        end
+        zero = ~zero;
+        overflow = (ALU_control[3:2] == 2'b00)? (~src1[31] & ~src2[31] & cout_wire[30]) | ( src1[31] & src2[31] & ~cout_wire[30]):
+                   (ALU_control[3:2] == 2'b01)? ( src1[31] & ~src2[31] & cout_wire[30]) | (~src1[31] & src2[31] & ~cout_wire[30]): 0;
     end
 endmodule
