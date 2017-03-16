@@ -9,7 +9,8 @@ module alu_top(
                cin,        //1 bit carry in (input)
                operation,  //operation      (input)
                result,     //1 bit result   (output)
-               cout        //1 bit carry out(output)
+               cout,       //1 bit carry out(output)
+               set         //1 bit set      (output)
                );
     input         src1;
     input         src2;
@@ -21,6 +22,7 @@ module alu_top(
 
     output        result;
     output        cout;
+    output        set;
 
     reg           result;
 
@@ -34,6 +36,8 @@ module alu_top(
     assign        result1 = A | B;
     full_adder FA(A, B, cin, result2, cout);
     assign        result3 = (less); // not desided yet
+
+    assign        set     = result2;
 
     always @ ( * ) begin
         result <= (operation == 2'b00) ? result0:
