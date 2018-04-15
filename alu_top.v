@@ -24,7 +24,6 @@ module alu_top(
     output        cout;
     output        set;
 
-    reg           result;
 
     wire A, B;
     assign A = (A_invert) ? ~src1 : src1;
@@ -39,12 +38,11 @@ module alu_top(
 
     assign        set     = result2;
 
-    always @ ( * ) begin
-        result <= (operation == 2'b00) ? result0:
-                  (operation == 2'b01) ? result1:
-                  (operation == 2'b10) ? result2:
-                  (operation == 2'b11) ? result3: 2'bxx;
-    end
+
+    assign  result = (operation == 2'b00) ? result0:
+                     (operation == 2'b01) ? result1:
+                     (operation == 2'b10) ? result2:
+                     (operation == 2'b11) ? result3: 2'bxx;
 
 
 
